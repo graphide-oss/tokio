@@ -571,9 +571,9 @@ jobs:
           - target: armv5te-unknown-linux-gnueabi
             os: ubuntu-latest
           - target: armv7-unknown-linux-gnueabihf
-            os: graphide-linux-arm64-4
+            os: ubuntu-24.04-arm
           - target: aarch64-unknown-linux-gnu
-            os: graphide-linux-arm64-4
+            os: ubuntu-24.04-arm
             extra_features: "io-uring,taskdump"
     steps:
       - uses: actions/checkout@v7
@@ -619,9 +619,9 @@ jobs:
           - target: armv5te-unknown-linux-gnueabi
             os: ubuntu-latest
           - target: armv7-unknown-linux-gnueabihf
-            os: graphide-linux-arm64-4
+            os: ubuntu-24.04-arm
           - target: aarch64-unknown-linux-gnu
-            os: graphide-linux-arm64-4
+            os: ubuntu-24.04-arm
             extra_features: "io-uring,taskdump"
     steps:
       - uses: actions/checkout@v7
