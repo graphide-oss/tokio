@@ -21,7 +21,7 @@ permissions:
 jobs:
   stress-test:
     name: Stress Test
-    runs-on: ubuntu-latest
+    runs-on: graphide-linux-x64-4
     strategy:
       matrix:
         stress-test:
