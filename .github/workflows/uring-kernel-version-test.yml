@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: graphide-linux-x64-8
     env:
       KERNEL_VERSION: ${{ inputs.kernel_version }}
     steps:
