@@ -18,7 +18,7 @@ jobs:
       checks: write
       contents: read
       issues: write
-    runs-on: ubuntu-latest
+    runs-on: graphide-linux-x64-4
     steps:
     - uses: actions/checkout@v7
     - uses: EmbarkStudios/cargo-deny-action@v2
