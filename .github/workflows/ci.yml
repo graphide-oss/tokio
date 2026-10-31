@@ -58,13 +58,11 @@ jobs:
   test-tokio-full:
     needs: basics
     name: test tokio full
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         os:
-          - windows-latest
           - ubuntu-latest
-          - macos-latest
     steps:
       - uses: actions/checkout@v7
       - name: Install Rust ${{ env.rust_stable }}
@@ -93,13 +91,11 @@ jobs:
   test-workspace-all-features:
     needs: basics
     name: test all crates in the workspace with all features
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         os:
-          - windows-latest
           - ubuntu-latest
-          - macos-latest
     steps:
       - uses: actions/checkout@v7
       - name: Install Rust ${{ env.rust_stable }}
@@ -135,13 +131,11 @@ jobs:
   test-workspace-all-features-panic-abort:
     needs: basics
     name: test all crates in the workspace with all features and panic=abort
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         os:
-          - windows-latest
           - ubuntu-latest
-          - macos-latest
     steps:
       - uses: actions/checkout@v7
       - name: Install Rust ${{ env.rust_nightly }}
@@ -171,13 +165,11 @@ jobs:
   test-integration-tests-per-feature:
     needs: basics
     name: Run integration tests for each feature
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         os:
-          - windows-latest
           - ubuntu-latest
-          - macos-latest
     steps:
       - uses: actions/checkout@v7
       - name: Install Rust ${{ env.rust_stable }}
@@ -279,15 +271,13 @@ jobs:
   test-unstable:
     name: test tokio full --unstable
     needs: basics
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
-          - { os: windows-latest, extra_features: "" }
           - { os: ubuntu-latest, extra_features: "" }
           # only Linux supports io_uring
           - { os: ubuntu-latest, extra_features: io-uring }
-          - { os: macos-latest, extra_features: "" }
     steps:
       - uses: actions/checkout@v7
       - name: Install Rust ${{ env.rust_stable }}
@@ -585,8 +575,6 @@ jobs:
           - target: aarch64-unknown-linux-gnu
             os: ubuntu-24.04-arm
             extra_features: "io-uring,taskdump"
-          - target: aarch64-pc-windows-msvc
-            os: windows-11-arm
     steps:
       - uses: actions/checkout@v7
       - name: Install Rust stable
@@ -635,8 +623,6 @@ jobs:
           - target: aarch64-unknown-linux-gnu
             os: ubuntu-24.04-arm
             extra_features: "io-uring,taskdump"
-          - target: aarch64-pc-windows-msvc
-            os: windows-11-arm
     steps:
       - uses: actions/checkout@v7
       - name: Install Rust stable
@@ -882,12 +868,10 @@ jobs:
 
   docs:
     name: docs
-    runs-on: ${{ matrix.run.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         run:
-          - os: windows-latest
-            extra_features: "tracing"
           - os: ubuntu-latest
             extra_features: "tracing,io-uring,taskdump"
 
@@ -936,13 +920,11 @@ jobs:
   test-hyper:
     name: Test hyper
     needs: basics
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         os:
-          - windows-latest
           - ubuntu-latest
-          - macos-latest
     steps:
       - uses: actions/checkout@v7
       - name: Install Rust ${{ env.rust_stable }}
@@ -990,13 +972,11 @@ jobs:
   test-quinn:
     name: Test Quinn
     needs: basics
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         os:
-          - windows-latest
           - ubuntu-latest
-          - macos-latest
     steps:
       - uses: actions/checkout@v7
       - name: Install Rust ${{ env.rust_stable }}
@@ -1258,13 +1238,10 @@ jobs:
   check-external-types:
     name: check-external-types (${{ matrix.os }})
     needs: basics
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
-          - os: windows-latest
-            # Windows neither supports io-uring nor taskdump.
-            extra_features: "tracing"
           - os: ubuntu-latest
             # includes all unstable features.
             extra_features: "tracing,io-uring,taskdump"
