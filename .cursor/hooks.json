@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "sh .graphide/agent-signal.sh start cursor; exit 0",
+        "timeout": 5
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "sh .graphide/agent-signal.sh run-prep cursor; exit 0",
+        "matcher": "MCP:ci_run_tests",
+        "timeout": 25
+      }
+    ],
+    "afterFileEdit": [
+      {
+        "command": "sh .graphide/agent-signal.sh edit cursor; exit 0",
+        "timeout": 5
+      }
+    ],
+    "afterShellExecution": [
+      {
+        "command": "sh .graphide/agent-signal.sh shell cursor; exit 0",
+        "timeout": 5
+      }
+    ],
+    "sessionEnd": [
+      {
+        "command": "sh .graphide/agent-signal.sh end cursor; exit 0",
+        "timeout": 5
+      }
+    ]
+  }
+}

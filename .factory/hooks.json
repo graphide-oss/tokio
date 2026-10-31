@@ -1,0 +1,69 @@
+{
+  "SessionStart": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "sh \"$FACTORY_PROJECT_DIR/.graphide/agent-signal.sh\" start factory 2>/dev/null || true",
+          "timeout": 5
+        }
+      ]
+    }
+  ],
+  "UserPromptSubmit": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "sh \"$FACTORY_PROJECT_DIR/.graphide/agent-signal.sh\" prompt factory 2>/dev/null || true",
+          "timeout": 5
+        }
+      ]
+    }
+  ],
+  "PreToolUse": [
+    {
+      "matcher": "mcp__.*__ci_run_tests",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "sh \"$FACTORY_PROJECT_DIR/.graphide/agent-signal.sh\" run-prep factory 2>/dev/null || true",
+          "timeout": 25
+        }
+      ]
+    }
+  ],
+  "PostToolUse": [
+    {
+      "matcher": "Edit|Create|ApplyPatch",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "sh \"$FACTORY_PROJECT_DIR/.graphide/agent-signal.sh\" edit factory 2>/dev/null || true",
+          "timeout": 5
+        }
+      ]
+    },
+    {
+      "matcher": "Execute",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "sh \"$FACTORY_PROJECT_DIR/.graphide/agent-signal.sh\" shell factory 2>/dev/null || true",
+          "timeout": 5
+        }
+      ]
+    }
+  ],
+  "SessionEnd": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "sh \"$FACTORY_PROJECT_DIR/.graphide/agent-signal.sh\" end factory 2>/dev/null || true",
+          "timeout": 2
+        }
+      ]
+    }
+  ]
+}

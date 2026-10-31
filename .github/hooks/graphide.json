@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": "sh \"$(git rev-parse --show-toplevel 2>/dev/null)/.graphide/agent-signal.sh\" start copilot 2>/dev/null || true",
+        "timeoutSec": 5
+      }
+    ],
+    "userPromptSubmitted": [
+      {
+        "type": "command",
+        "bash": "sh \"$(git rev-parse --show-toplevel 2>/dev/null)/.graphide/agent-signal.sh\" prompt copilot 2>/dev/null || true",
+        "timeoutSec": 5
+      }
+    ],
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": "sh \"$(git rev-parse --show-toplevel 2>/dev/null)/.graphide/agent-signal.sh\" run-prep copilot 2>/dev/null || true",
+        "matcher": ".*ci_run_tests",
+        "timeoutSec": 25
+      }
+    ],
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "sh \"$(git rev-parse --show-toplevel 2>/dev/null)/.graphide/agent-signal.sh\" tool copilot 2>/dev/null || true",
+        "timeoutSec": 5
+      }
+    ],
+    "sessionEnd": [
+      {
+        "type": "command",
+        "bash": "sh \"$(git rev-parse --show-toplevel 2>/dev/null)/.graphide/agent-signal.sh\" end copilot 2>/dev/null || true",
+        "timeoutSec": 5
+      }
+    ]
+  }
+}

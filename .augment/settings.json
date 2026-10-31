@@ -1,0 +1,60 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$AUGMENT_PROJECT_DIR/.graphide/agent-signal.sh\" start augment 2>/dev/null || true",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "PromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$AUGMENT_PROJECT_DIR/.graphide/agent-signal.sh\" prompt augment 2>/dev/null || true",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "ci_run_tests_.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$AUGMENT_PROJECT_DIR/.graphide/agent-signal.sh\" run-prep augment 2>/dev/null || true",
+            "timeout": 25000
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$AUGMENT_PROJECT_DIR/.graphide/agent-signal.sh\" tool augment 2>/dev/null || true",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$AUGMENT_PROJECT_DIR/.graphide/agent-signal.sh\" end augment 2>/dev/null || true",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}

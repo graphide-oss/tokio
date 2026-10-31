@@ -1,0 +1,29 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "graphide-signal-start",
+      "trigger": "SessionStart",
+      "action": {
+        "type": "command",
+        "command": "sh \"$(git rev-parse --show-toplevel 2>/dev/null)/.graphide/agent-signal.sh\" start kiro 2>/dev/null || true"
+      }
+    },
+    {
+      "name": "graphide-signal-prompt",
+      "trigger": "UserPromptSubmit",
+      "action": {
+        "type": "command",
+        "command": "sh \"$(git rev-parse --show-toplevel 2>/dev/null)/.graphide/agent-signal.sh\" prompt kiro 2>/dev/null || true"
+      }
+    },
+    {
+      "name": "graphide-signal-tool",
+      "trigger": "PostToolUse",
+      "action": {
+        "type": "command",
+        "command": "sh \"$(git rev-parse --show-toplevel 2>/dev/null)/.graphide/agent-signal.sh\" tool kiro 2>/dev/null || true"
+      }
+    }
+  ]
+}

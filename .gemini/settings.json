@@ -1,0 +1,79 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$GEMINI_PROJECT_DIR/.graphide/agent-signal.sh\" start gemini 2>/dev/null || true",
+            "timeout": 2000
+          }
+        ]
+      }
+    ],
+    "BeforeAgent": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$GEMINI_PROJECT_DIR/.graphide/agent-signal.sh\" prompt gemini 2>/dev/null || true",
+            "timeout": 2000
+          }
+        ]
+      }
+    ],
+    "BeforeTool": [
+      {
+        "matcher": ".*ci_run_tests",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$GEMINI_PROJECT_DIR/.graphide/agent-signal.sh\" run-prep gemini 2>/dev/null || true",
+            "timeout": 25000
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": "write_file|replace",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$GEMINI_PROJECT_DIR/.graphide/agent-signal.sh\" edit gemini 2>/dev/null || true",
+            "timeout": 2000
+          }
+        ]
+      },
+      {
+        "matcher": "run_shell_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$GEMINI_PROJECT_DIR/.graphide/agent-signal.sh\" shell gemini 2>/dev/null || true",
+            "timeout": 2000
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$GEMINI_PROJECT_DIR/.graphide/agent-signal.sh\" end gemini 2>/dev/null || true",
+            "timeout": 2000
+          }
+        ]
+      }
+    ]
+  },
+  "mcpServers": {
+    "graphide": {
+      "httpUrl": "https://mcp.graphide.com"
+    }
+  }
+}
